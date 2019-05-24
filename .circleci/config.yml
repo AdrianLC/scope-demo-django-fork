@@ -10,5 +10,3 @@ jobs:
       - run: COMMIT=$(git rev-parse HEAD) docker-compose build
       - run: COMMIT=$(git rev-parse HEAD) docker-compose up --exit-code-from=tests-worker tests-worker
       - run: COMMIT=$(git rev-parse HEAD) docker-compose up --exit-code-from=tests-frontend tests-frontend
-      - run: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-      - run: COMMIT=$(git rev-parse HEAD) docker-compose push demo-django-ui demo-django-frontend demo-django-worker
