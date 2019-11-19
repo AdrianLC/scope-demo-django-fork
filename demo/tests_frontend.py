@@ -37,4 +37,32 @@ class UnitTests(TestCase):
         self.assertEqual(response.content, b"bc89c6f72947bcd2f783d342a46cafcfccfcc2e7884a34f1cfe8f55bad2d200e")
 
     def test_unhandled_exception(self):
-        raise Exception("Something really bad happened")
+        pass
+        # raise Exception("Something really bad happened")
+
+
+import random  # noqa
+
+
+class BrokenFixedTests(TestCase):
+    pass
+
+
+fixed = random.choice((0, 1)) == 0
+
+
+for n in range(50):
+    name = f'test_{n}'
+
+    def func(self):
+        if fixed:
+            return
+
+        errored = random.choice((0, 1)) == 0
+        if errored:
+            raise ValueError("BOOOOM!")
+        # else failed
+        self.assertEqual(0, 1)
+
+    func.__name__ = name
+    setattr(BrokenFixedTests, name, func)
